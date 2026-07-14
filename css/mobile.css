@@ -1,0 +1,137 @@
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+.hamburger {
+    display: flex;
+}
+.navbar.menu-open .search-wrap,
+.navbar.menu-open .icon-btn {
+visibility: visible;
+}
+.nav-links {
+position: fixed;
+top: 50px;
+right: 0;
+z-index: 999;
+padding-top: 1.5rem;
+height: 100vh;
+width: fit-content;
+max-width: 75vw;
+min-width: 160px;
+flex-direction: column;
+align-items: flex-start;
+gap: 2rem;
+padding-left: 2rem;
+transform: translateX(100%);
+transition: transform 0.3s ease;
+}
+.nav-links.open {
+  background: rgba(10, 10, 10);
+  display: flex;
+  transform: translateX(0);
+}
+.nav-links a {
+    font-size: 1.1rem;
+}
+.nav-cta {
+    margin-top: 0.5rem;
+}
+
+.footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+}
+.footer-brand {
+    grid-column: 1 / -1;
+}
+}
+
+
+/* ==========================================
+   RESPONSIVE TRAITS (590px and below)
+   ========================================== */
+@media (max-width: 590px) {
+
+  .search-wrap {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  .search-box {
+    background: transparent !important;
+    border: none !important;
+    padding: 0;
+    gap: 0;
+    width: auto;
+    height: auto;
+  }
+
+  .search-box:focus-within {
+    border-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Icon-only state */
+  .search-box svg {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff !important;
+    cursor: pointer;
+    transition: stroke 0.2s ease, transform 0.2s ease;
+  }
+
+  .search-box svg:hover {
+    stroke: #cccccc !important;
+    transform: scale(1.1);
+  }
+
+  /* Hide input + clear button until expanded */
+  .search-box input,
+  .search-clear,
+  .search-clear.visible {
+    display: none !important;
+  }
+
+  /* Expanded state (toggled via JS) */
+  .search-box.expanded {
+    background: rgba(0, 0, 0, 0.85) !important;
+    border: 1px solid #444 !important;
+    padding: 6px 10px;
+    gap: 8px;
+    width: 200px;
+  }
+
+  .search-box.expanded svg {
+    stroke: #ffffff !important;
+    transform: none;
+  }
+
+  .search-box.expanded input {
+    display: block !important;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    width: 100%;
+  }
+
+  .search-box.expanded .search-clear {
+    display: block !important;
+  }
+
+  .search-results {
+    left: auto;
+    right: 0;
+    width: 280px;
+  }
+}
+
+
+@media (max-width: 480px) {
+.footer-inner {
+    grid-template-columns: 1fr;
+}
+}

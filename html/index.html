@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinStore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/mobile.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="/" class="brand">
+      <span class="brand-mark">F</span>
+      <span class="brand-name">FinStore</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="/about.html">Offers</a></li>
+      <li><a href="/contact.html">Subscribe</a></li>
+    </ul>
+
+    <div class="search-wrap">
+    <div class="search-box" id="searchBox">
+        <button type="button" class="search-icon-btn" id="searchToggle" aria-label="Toggle search" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        </button>
+        <input type="text" id="searchInput" placeholder="Search products" autocomplete="off">
+        <button class="search-clear" id="searchClear" aria-label="Clear search">&times;</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <div class="nav-icons">
+      <a href="/account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="/cart.html" class="icon-btn cart-icon-wrap" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+          <path d="M3 6h18"></path>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span>NEW DROP JUST LANDED</span>
+      <span>FREE SHIPPING OVER $75</span>
+      <span>LIMITED STOCK — MOVE FAST</span>
+      <span>NEW DROP JUST LANDED</span>
+      <span>FREE SHIPPING OVER $75</span>
+      <span>LIMITED STOCK — MOVE FAST</span>
+      <span>NEW DROP JUST LANDED</span>
+      <span>FREE SHIPPING OVER $75</span>
+      <span>LIMITED STOCK — MOVE FAST</span>
+    </div>
+  </div>
+
+  <div class="hero-main">
+    <div class="copy">
+      <div class="eyebrow">DROP 014 — LIVE NOW</div>
+      <h1 class="headline">
+        NEW<br>
+        <span class="accent">DROP.</span><br>
+        <span class="outline">JUST LANDED.</span>
+      </h1>
+      <p class="sub">
+        112 pieces. No restocks. Everything you see sells out by Friday —
+        the ones who move first get to keep it.
+      </p>
+      <div class="cta-row">
+        <button class="btn-primary">
+          Shop the Drop
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="btn-secondary">View Full Collection</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="product-plate">
+        <svg class="placeholder-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#C6F135" stroke-width="1.5" stroke-dasharray="4 6" opacity="0.5"/>
+          <path d="M60 130 C60 100, 75 70, 110 65 C135 61, 150 75, 150 95 C150 115, 130 125, 130 135 L60 135 Z"
+                fill="#FF6B35" opacity="0.9"/>
+          <path d="M60 130 L150 130 L150 145 C150 150 145 152 138 152 L68 152 C62 152 60 149 60 145 Z"
+                fill="#FFF8ED"/>
+        </svg>
+
+        <div class="tag tag--1">
+          <span class="tag-label">Best seller</span>
+          <span class="tag-price"><span class="was">$129</span>$89</span>
+        </div>
+
+        <div class="tag tag--2">
+          <span class="tag-label">Only 6 left</span>
+          <span class="tag-price">$64</span>
+        </div>
+
+        <div class="stock-pill"><span class="dot"></span> 214 sold today</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="section-header">
+    <span class="section-eyebrow">Shop the collection</span>
+    <h2 class="section-title">Featured Products</h2>
+    <p class="section-subtitle">Handpicked pieces made to last, from everyday carry to considered details.</p>
+  </div>
+
+  <div class="card-grid">
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=800&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=800&fit=crop" alt="Leather backpack">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Heritage Leather Backpack</h3>
+      <p class="product-desc">Full-grain leather, brass hardware, and a padded 15" laptop sleeve built to age well.</p>
+      <p class="stock-status">In stock</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 8,500</span>
+        <button class="add-to-cart" data-name="Heritage Leather Backpack" data-price="8500">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=500&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=500&fit=crop" alt="Sneakers">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Runner Low Sneakers</h3>
+      <p class="product-desc">Lightweight knit upper with a responsive foam sole, made for all-day wear.</p>
+      <p class="stock-status">In stock</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 4,200</span>
+        <button class="add-to-cart" data-name="Runner Low Sneakers" data-price="4200">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&h=800&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&h=800&fit=crop" alt="Wristwatch">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Classic Steel Watch</h3>
+      <p class="product-desc">Stainless steel case, sapphire crystal, and a hand-stitched leather strap.</p>
+      <p class="stock-status">3 left</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 12,900</span>
+        <button class="add-to-cart" data-name="Classic Steel Watch" data-price="12900">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo">Fin<span>Store</span></a>
+      <p>Considered goods, built to last. Leather, steel, and honest materials, sourced with care.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="X / Twitter">X</a>
+      </div>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="/shop.html">All products</a></li>
+        <li><a href="/shop.html">Bags</a></li>
+        <li><a href="/shop.html">Footwear</a></li>
+        <li><a href="/shop.html">Watches</a></li>
+      </ul>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about.html">About us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="#">Shipping and Returns</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Stay in touch</h4>
+      <ul class="footer-contact">
+        <li>Nairobi, Kenya</li>
+        <li>hello@mystore.co.ke</li>
+        <li>+254 700 000 000</li>
+      </ul>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email" required>
+        <button type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+ 
+  <div class="footer-bottom">
+    <p>&copy; 2026 MyStore. All rights reserved.</p>
+    <ul class="footer-legal">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </div>
+</footer>
+
+</div>
+
+<script src="../javascript/index.js"></script>
+</body>
+</html>
