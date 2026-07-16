@@ -19,8 +19,8 @@
     </h1 >
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="/">Home</a></li>
-      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#products-section">Shop</a></li>
       <li><a href="/about.html">Offers</a></li>
       <li><a href="/contact.html">Subscribe</a></li>
     </ul>
@@ -46,7 +46,7 @@
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </a>
-      <a href="/cart.html" class="icon-btn cart-icon-wrap" aria-label="Cart">
+      <a href="../html/cart.html" class="icon-btn cart-icon-wrap" aria-label="Cart">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
           <path d="M3 6h18"></path>
@@ -61,7 +61,7 @@
   </nav>
 </header>
 
-<section class="hero">
+<section class="hero" id="hero">
   <div class="marquee-band">
     <div class="marquee-track">
       <span>NEW DROP JUST LANDED</span>
@@ -95,7 +95,6 @@
             <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <button class="btn-secondary">View Full Collection</button>
       </div>
     </div>
 
@@ -125,7 +124,7 @@
   </div>
 </section>
 
-<section class="products-section">
+<section class="products-section" id="products-section">
   <div class="section-header">
     <span class="section-eyebrow">Shop the collection</span>
     <h2 class="section-title">Featured Products</h2>
@@ -183,6 +182,7 @@
         <button class="add-to-cart" data-name="Classic Steel Watch" data-price="12900">Add to Cart</button>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -242,7 +242,7 @@
   </div>
 </footer>
 
-
+<script src="../javascript/cart.js"></script>
 <script src="../javascript/index.js"></script>
 </body>
 </html>

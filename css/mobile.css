@@ -25,7 +25,7 @@ transform: translateX(100%);
 transition: transform 0.3s ease;
 }
 .nav-links.open {
-  background: rgba(10, 10, 10);
+  background: var(--bg);
   display: flex;
   transform: translateX(0);
 }
@@ -78,13 +78,13 @@ transition: transform 0.3s ease;
     box-shadow: none !important;
     width: 20px;
     height: 20px;
-    stroke: #ffffff !important;
+    stroke: var(--white) !important;
     cursor: pointer;
     transition: stroke 0.2s ease, transform 0.2s ease;
   }
 
   .search-box svg:hover {
-    stroke: #cccccc !important;
+    stroke: var(--lime) !important;
     transform: scale(1.1);
   }
 
@@ -97,15 +97,15 @@ transition: transform 0.3s ease;
 
   /* Expanded state (toggled via JS) */
   .search-box.expanded {
-    background: rgba(0, 0, 0, 0.85) !important;
-    border: 1px solid #444 !important;
+    background: var(--bg-soft) !important;
+    border: 1px solid var(--nav-border) !important;
     padding: 6px 10px;
     gap: 8px;
     width: 200px;
   }
 
   .search-box.expanded svg {
-    stroke: #ffffff !important;
+    stroke: var(--lime) !important;
     transform: none;
   }
 
@@ -114,7 +114,7 @@ transition: transform 0.3s ease;
     background: transparent;
     border: none;
     outline: none;
-    color: #fff;
+    color: var(--white);
     width: 100%;
   }
 
