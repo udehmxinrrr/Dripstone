@@ -123,17 +123,51 @@ function updateSummary(cart){
   const subtotalText = formatKSh(subtotal);
   const totalText = formatKSh(total);
 
-  const summarySubtotalEl = document.getElementById('summarySubtotal');
-  if(summarySubtotalEl) summarySubtotalEl.textContent = subtotalText;
+  const orderSummaryEl = document.getElementById('orderSummary');
+  if(orderSummaryEl){
+    orderSummaryEl.innerHTML = `
+      <p class="order-summary-label">ORDER SUMMARY</p>
+      <div class="order-row">
+        <span>SUBTOTAL</span>
+        <span id="summarySubtotal">${subtotalText}</span>
+      </div>
+      <div class="order-row">
+        <span>SHIPPING</span>
+        <span id="summaryShipping">FREE</span>
+      </div>
+      <div class="order-row order-total">
+        <span>TOTAL</span>
+        <span id="summaryTotal">${totalText}</span>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">
+        Checkout
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    `;
+  }
 
-  const summaryShippingEl = document.getElementById('summaryShipping');
-  if(summaryShippingEl) summaryShippingEl.textContent = 'FREE';
+  const mobileBarInnerEl = document.getElementById('mobileCheckoutBar');
+  if(mobileBarInnerEl){
+    mobileBarInnerEl.innerHTML = `
+      <p class="mobile-checkout-label">ORDER SUMMARY</p>
+      <div class="mobile-checkout-row">
+        <div class="mobile-checkout-total">
+          <span>TOTAL</span>
+          <strong id="mobileSummaryTotal">${totalText}</strong>
+        </div>
+        <button class="btn-checkout" id="mobileCheckoutBtn">Checkout</button>
+      </div>
+    `;
+  }
 
-  const summaryTotalEl = document.getElementById('summaryTotal');
-  if(summaryTotalEl) summaryTotalEl.textContent = totalText;
+  // re-wire checkout buttons since they were just recreated
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if(checkoutBtn) checkoutBtn.addEventListener('click', goToCheckout);
 
-  const mobileSummaryTotalEl = document.getElementById('mobileSummaryTotal');
-  if(mobileSummaryTotalEl) mobileSummaryTotalEl.textContent = totalText;
+  const mobileCheckoutBtn = document.getElementById('mobileCheckoutBtn');
+  if(mobileCheckoutBtn) mobileCheckoutBtn.addEventListener('click', goToCheckout);
 }
 
 /* ========== EVENT DELEGATION FOR CART PAGE CONTROLS ========== */
@@ -164,16 +198,6 @@ function goToCheckout(){
   if(cart.length === 0) return;
   // Redirect to your checkout flow here
   alert('Proceeding to checkout — hook this up to your actual checkout page.');
-}
-
-const checkoutBtn = document.getElementById('checkoutBtn');
-if(checkoutBtn){
-  checkoutBtn.addEventListener('click', goToCheckout);
-}
-
-const mobileCheckoutBtn = document.getElementById('mobileCheckoutBtn');
-if(mobileCheckoutBtn){
-  mobileCheckoutBtn.addEventListener('click', goToCheckout);
 }
 
 /* ========== INIT ========== */

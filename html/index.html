@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinStore</title>
+    <title>DripStone</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
@@ -14,15 +14,15 @@
 <header class="site-header">
   <nav class="navbar">
     <h1 class="brand">
-      <span class="brand-mark">F</span>
-      <span class="brand-name">FinStore</span>
+      <span class="brand-mark">D</span>
+      <span class="brand-name">DripStone</span>
     </h1 >
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="#hero">Home</a></li>
+      <li><a href="../html/index.html">Home</a></li>
       <li><a href="#products-section">Shop</a></li>
-      <li><a href="/about.html">Offers</a></li>
-      <li><a href="/contact.html">Subscribe</a></li>
+      <li><a href="#offer-section">Offers</a></li>
+      <li><a href="#subscribe">Subscribe</a></li>
     </ul>
 
     <div class="search-wrap">
@@ -40,12 +40,6 @@
     </div>
 
     <div class="nav-icons">
-      <a href="/account.html" class="icon-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </a>
       <a href="../html/cart.html" class="icon-btn cart-icon-wrap" aria-label="Cart">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
@@ -89,12 +83,12 @@
         the ones who move first get to keep it.
       </p>
       <div class="cta-row">
-        <button class="btn-primary">
+        <a href="#products-section" class="btn-primary">
           Shop the Drop
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-        </button>
+        </a>
       </div>
     </div>
 
@@ -186,11 +180,100 @@
   </div>
 </section>
 
+
+
+<section class="products-section" id="offer-section">
+  <div class="section-header">
+    <span class="section-eyebrow">While stock lasts</span>
+    <h2 class="section-title">This Week's Drop</h2>
+    <p class="section-subtitle">Small batches, no restocks. Once these sell out, they're gone for good.</p>
+  </div>
+
+  <div class="card-grid">
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=800&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=800&fit=crop" alt="Leather backpack">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Heritage Leather Backpack</h3>
+      <p class="product-desc">Full-grain leather, brass hardware, and a padded 15" laptop sleeve built to age well.</p>
+      <p class="stock-status">In stock</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 8,500</span>
+        <button class="add-to-cart" data-name="Heritage Leather Backpack" data-price="8500">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=500&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=500&fit=crop" alt="Sneakers">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Runner Low Sneakers</h3>
+      <p class="product-desc">Lightweight knit upper with a responsive foam sole, made for all-day wear.</p>
+      <p class="stock-status">In stock</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 4,200</span>
+        <button class="add-to-cart" data-name="Runner Low Sneakers" data-price="4200">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="image-zone">
+      <img class="image-bg" src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&h=800&fit=crop" alt="">
+      <img class="image-fg" src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&h=800&fit=crop" alt="Wristwatch">
+    </div>
+    <div class="blur-transition"></div>
+    <div class="info-panel">
+      <h3 class="product-name">Classic Steel Watch</h3>
+      <p class="product-desc">Stainless steel case, sapphire crystal, and a hand-stitched leather strap.</p>
+      <p class="stock-status">3 left</p>
+      <div class="card-actions">
+        <span class="price-pill">KES 12,900</span>
+        <button class="add-to-cart" data-name="Classic Steel Watch" data-price="12900">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
  
+
+<section class="subscribe-section" id="subscribe">
+  <div class="subscribe-inner">
+    <div class="subscribe-copy">
+      <span class="section-eyebrow">Don't miss the next drop</span>
+      <h2 class="subscribe-title">Get In <span class="outline">Early.</span></h2>
+      <p class="subscribe-sub">Restock alerts, early access, and the occasional discount code. No spam, unsubscribe anytime.</p>
+    </div>
+
+    <form class="subscribe-form" id="subscribeForm">
+      <div class="subscribe-input-wrap">
+        <input type="email" id="subscribeEmail" placeholder="Enter your email" required autocomplete="email">
+        <button type="submit" class="btn-subscribe">
+          Subscribe
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="subscribe-msg" id="subscribeMsg" hidden></p>
+    </form>
+  </div>
+</section>
+
+
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="/" class="logo">Fin<span>Store</span></a>
+      <a href="/" class="logo">Drip<span>Stone</span></a>
       <p>Considered goods, built to last. Leather, steel, and honest materials, sourced with care.</p>
       <div class="footer-social">
         <a href="#" aria-label="Instagram">IG</a>
@@ -223,18 +306,14 @@
       <h4>Stay in touch</h4>
       <ul class="footer-contact">
         <li>Nairobi, Kenya</li>
-        <li>hello@mystore.co.ke</li>
+        <li>DripStone.co.ke</li>
         <li>+254 700 000 000</li>
       </ul>
-      <form class="newsletter-form" onsubmit="return false;">
-        <input type="email" placeholder="Your email" required>
-        <button type="submit">Join</button>
-      </form>
     </div>
   </div>
  
   <div class="footer-bottom">
-    <p>&copy; 2026 MyStore. All rights reserved.</p>
+    <p>&copy; 2026 DripStone. All rights reserved.</p>
     <ul class="footer-legal">
       <li><a href="#">Privacy Policy</a></li>
       <li><a href="#">Terms of Service</a></li>
@@ -242,6 +321,7 @@
   </div>
 </footer>
 
+<script src="../javascript/sanity.js"></script>
 <script src="../javascript/cart.js"></script>
 <script src="../javascript/index.js"></script>
 </body>

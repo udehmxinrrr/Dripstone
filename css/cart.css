@@ -3,26 +3,6 @@
    ===================================================== */
 
 /* ---- urgency band (marquee, cart-specific) ---- */
-.cart-urgency-band {
-  position: relative;
-  background: var(--tangerine);
-  padding: 10px 0;
-  overflow: hidden;
-}
-.cart-urgency-track {
-  display: flex;
-  width: max-content;
-  animation: scroll-left 22s linear infinite;
-}
-.cart-urgency-track span {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--bg);
-  padding: 0 24px;
-  white-space: nowrap;
-}
 
 /* ---- page shell ---- */
 .cart-page {
@@ -31,6 +11,7 @@
   padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem) 6rem;
   background: var(--bg);
   min-height: 60vh;
+  margin-top: 72px; /* match your .site-header height */
 }
 
 .cart-title {
@@ -50,7 +31,9 @@
   gap: clamp(1.5rem, 4vw, 2.5rem);
   align-items: start;
 }
-
+.cart-layout[hidden] {
+  display: none;
+}
 /* ---- cart item (ticket stub) ---- */
 .cart-items {
   display: flex;
@@ -218,7 +201,16 @@
 }
 .cart-empty-headline .outline {
   color: transparent;
-  -webkit-text-stroke: 2px var(--cream);
+  -webkit-text-stroke: 2.1px var(--tangerine);
+}
+@media (max-width: 960px) {
+  .cart-empty-headline .outline {
+    text-shadow:
+      -1px -1px 0 var(--tangerine),
+       1px -1px 0 var(--tangerine),
+      -1px  1px 0 var(--tangerine),
+       1px  1px 0 var(--tangerine);
+  }
 }
 .cart-empty-sub {
   font-size: 16px;
@@ -226,9 +218,10 @@
   margin-bottom: 2rem;
 }
 
-/* ---- mobile sticky checkout bar ---- */
+
+/* ---- mobile sticky checkout bar (mini receipt card) ---- */
 .mobile-checkout-bar {
-  display: none;
+  display: block;
 }
 
 @media (max-width: 900px) {
@@ -237,18 +230,34 @@
 
   .mobile-checkout-bar {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-direction: column;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0.9rem;
+    left: 0.9rem;
+    right: 0.9rem;
     background: var(--bg-soft);
-    border-top: 1px solid var(--line);
-    padding: 0.9rem 1.2rem;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
     z-index: 900;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.3);
   }
+
+  .mobile-checkout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--lime);
+    margin-bottom: 0.7rem;
+  }
+
+  .mobile-checkout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .mobile-checkout-total {
     display: flex;
     flex-direction: column;
@@ -257,14 +266,15 @@
     color: var(--cream-dim);
   }
   .mobile-checkout-total strong {
-    font-size: 15px;
+    font-size: 17px;
     color: var(--cream);
   }
+
   .mobile-checkout-bar .btn-checkout {
     width: auto;
     margin-top: 0;
     padding: 12px 24px;
   }
 
-  .cart-page { padding-bottom: 7rem; }
+  .cart-page { padding-bottom: 8rem; }
 }
