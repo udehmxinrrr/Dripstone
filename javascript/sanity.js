@@ -1,5 +1,5 @@
 // =========================================================
-// SANITY CONFIG
+// ======= SANITY CONFIG ===================================
 // =========================================================
 const SANITY_PROJECT_ID = 'la5zc8cr';
 const SANITY_DATASET = 'production';
@@ -19,7 +19,7 @@ async function sanityFetch(query){
 }
 
 // =========================================================
-// LOAD SITE SETTINGS (navbar + footer)
+// ===== LOAD SITE SETTINGS (navbar + footer) ==============
 // =========================================================
 async function loadSiteSettings(){
   const settings = await sanityFetch(`*[_type == "siteSettings"][0]`);
@@ -35,40 +35,138 @@ async function loadSiteSettings(){
 // ========= Hero Section Schema Code ==============
 // =================================================
 async function loadHero(){
-  const hero = await sanityFetch(`*[_type == "heroContent"][0]`);
+  const hero = await sanityFetch(`*[_type == "hero"][0]`);
   if(!hero) return;
 
-  document.querySelector('.eyebrow').textContent = hero.eyebrow;
+  // Product image — show real photo if uploaded, otherwise keep the SVG placeholder
+  const productImg = document.querySelector('.hero-product-img');
+  const placeholderSvg = document.querySelector('.placeholder-art');
+  if(hero.heroProductImage?.asset){
+    const imgUrl = sanityImageUrl(hero.heroProductImage, 600);
+    if(productImg && imgUrl){
+      productImg.src = imgUrl;
+      productImg.alt = hero.headlineLine1 || 'Featured product';
+      productImg.style.display = 'block';
+      if(placeholderSvg) placeholderSvg.style.display = 'none';
+    }
+  }
 
-  document.querySelector('.headline').innerHTML = `
-    ${hero.headlineLine1}<br>
-    <span class="accent">${hero.headlineAccent}</span><br>
-    <span class="outline">${hero.headlineOutline}</span>
-  `;
+  if(hero.marqueeItems?.length){
+    const track = document.querySelector('.marquee-track');
+    if(track){
+      const repeated = Array(3).fill(hero.marqueeItems).flat();
+      track.innerHTML = repeated.map(text => `<span>${text}</span>`).join('');
+    }
+  }
 
-  document.querySelector('.sub').textContent = hero.subtext;
+  const eyebrowEl = document.querySelector('.eyebrow');
+  if(eyebrowEl && hero.eyebrow) eyebrowEl.textContent = hero.eyebrow;
+
+  const headlineEl = document.querySelector('.headline');
+  if(headlineEl && (hero.headlineLine1 || hero.headlineAccent || hero.headlineOutline)){
+    headlineEl.innerHTML = `
+      ${hero.headlineLine1 || ''}<br>
+      <span class="accent">${hero.headlineAccent || ''}</span><br>
+      <span class="outline">${hero.headlineOutline || ''}</span>
+    `;
+  }
+
+  const subEl = document.querySelector('.sub');
+  if(subEl && hero.subtext) subEl.textContent = hero.subtext;
 
   const ctaBtn = document.querySelector('.cta-row .btn-primary');
-  if(ctaBtn){
-    // only replace the text node, keep the SVG arrow icon intact
-    ctaBtn.childNodes[0].textContent = hero.ctaLabel + ' ';
+  if(ctaBtn && hero.ctaLabel) ctaBtn.childNodes[0].textContent = hero.ctaLabel + ' ';
+
+  const tags = document.querySelectorAll('.tag');
+  if(tags[0]){
+    const label = tags[0].querySelector('.tag-label');
+    const price = tags[0].querySelector('.tag-price');
+    if(label && hero.tag1Label) label.textContent = hero.tag1Label;
+    if(price && (hero.tag1WasPrice || hero.tag1Price)){
+      price.innerHTML = `<span class="was">${hero.tag1WasPrice || ''}</span>${hero.tag1Price || ''}`;
+    }
+  }
+  if(tags[1]){
+    const label = tags[1].querySelector('.tag-label');
+    const price = tags[1].querySelector('.tag-price');
+    if(label && hero.tag2Label) label.textContent = hero.tag2Label;
+    if(price && hero.tag2Price) price.textContent = hero.tag2Price;
+  }
+
+  const stockPill = document.querySelector('.stock-pill');
+  if(stockPill && hero.stockPillText){
+    stockPill.innerHTML = `<span class="dot"></span> ${hero.stockPillText}`;
   }
 }
 
-// =========================================================
-// ========= Marquee Schema Code ===========================
-// =========================================================
-async function loadMarquee(){
-  const settings = await sanityFetch(`*[_type == "siteSettings"][0]{marqueeItems}`);
-  const items = settings?.marqueeItems;
-  if(!items || items.length === 0) return;
 
-  const track = document.querySelector('.marquee-track');
-  if(!track) return;
+// =========================================================
+// === Currency Selection Logic ============================
+// =========================================================
+window.SITE_CURRENCY = 'USD';
 
-  const repeated = Array(3).fill(items).flat();
-  track.innerHTML = repeated.map(text => `<span>${text}</span>`).join('');
+async function loadCurrency(){
+  const settings = await sanityFetch(`*[_type == "siteSettings"][0]{currencyCode}`);
+  if(settings?.currencyCode) window.SITE_CURRENCY = settings.currencyCode;
 }
+
+function formatPrice(amount){
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: window.SITE_CURRENCY || 'USD',
+    minimumFractionDigits: 0
+  }).format(amount);
+}
+
+
+// =========================================================
+// === FETCH PRODUCTS BY SECTION ===========================
+// =========================================================
+async function loadProducts(sectionKey){
+  const products = await sanityFetch(
+    `*[_type == "product" && "${sectionKey}" in section]{
+      "id": _id,
+      name,
+      price,
+      desc,
+      stockStatus,
+      image
+    }`
+  );
+
+  return (products || []).map(p => ({
+    ...p,
+    image: sanityImageUrl(p.image)
+  }));
+}
+
+
+// =========================================================
+// ===== Product Rendering Logic Fetching From Sanity ======
+// =========================================================
+async function loadAndRenderProducts(){
+  const featuredGrid = document.querySelector('#products-section .card-grid');
+  const offerGrid = document.querySelector('#offer-section .card-grid');
+
+  // Skip entirely if this page has no product grids (e.g. cart.html, checkout.html)
+  if(!featuredGrid && !offerGrid) return;
+
+  if(typeof renderProductCards !== 'function'){
+    console.warn('renderProductCards() not available on this page — skipping product render.');
+    return;
+  }
+
+  const featuredItems = await loadProducts('products');
+  const offerItems = await loadProducts('offers');
+
+  window.featuredProducts = [...featuredItems, ...offerItems];
+
+  if(featuredGrid) renderProductCards(featuredItems, featuredGrid);
+  if(offerGrid) renderProductCards(offerItems, offerGrid);
+
+  if(typeof syncAddToCartButtons === 'function') syncAddToCartButtons();
+}
+
 
 // =========================================================
 // ===== Footer Schema Code ================================
@@ -110,13 +208,15 @@ async function loadFooterLogo(){
     ? `${words.join(' ')} <span>${last}</span>`
     : `<span>${last}</span>`;
 }
+
 // =================================================
 // ========= Loaders ===================
 // =================================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadCurrency();
   loadSiteSettings();
-  loadMarquee();
   loadHero();
   loadFooter();
   loadFooterLogo();
+  loadAndRenderProducts();
 });

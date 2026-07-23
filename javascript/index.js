@@ -27,43 +27,12 @@ navLinks.querySelectorAll('a').forEach(link => {
 // Add, remove, or edit entries here — cards render automatically.
 // Each product needs a unique id (used for the card and the cart).
 // =========================================================
-const featuredProducts = [
-  {
-    id: 'heritage-leather-backpack',
-    image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=800&fit=crop',
-    name: 'Heritage Leather Backpack',
-    price: 8500,
-    desc: 'Full-grain leather, brass hardware, and a padded 15" laptop sleeve built to age well.',
-    stockStatus: 'In stock'
-  },
-  {
-    id: 'runner-low-sneakers',
-    image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=500&fit=crop',
-    name: 'Runner Low Sneakers',
-    price: 4200,
-    desc: 'Lightweight knit upper with a responsive foam sole, made for all-day wear.',
-    stockStatus: 'In stock'
-  },
-  {
-    id: 'classic-steel-watch',
-    image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&h=800&fit=crop',
-    name: 'Classic Steel Watch',
-    price: 12900,
-    desc: 'Stainless steel case, sapphire crystal, and a hand-stitched leather strap.',
-    stockStatus: '3 left'
-  }
-];
+
 
 
 // =========================================================
 // CARD RENDERER
 // =========================================================
-function formatPrice(amount){
-  return typeof formatKSh === 'function'
-    ? formatKSh(amount)
-    : `${amount.toLocaleString('en-US')}`;
-}
-
 function renderProductCards(items, container){
   if(!container) return;
   container.innerHTML = items.map(item => `
@@ -86,10 +55,6 @@ function renderProductCards(items, container){
   `).join('');
 }
 
-const featuredGrid = document.querySelector('#products-section .card-grid');
-const offerGrid = document.querySelector('#offer-section .card-grid');
-renderProductCards(featuredProducts, featuredGrid);
-renderProductCards(featuredProducts, offerGrid);
 
 // =========================================================
 // Sync "Add to Cart" buttons with current cart state
@@ -123,7 +88,7 @@ document.addEventListener('click', (e) => {
   e.stopPropagation();
 
   const productId = btn.dataset.productId;
-  const product = featuredProducts.find(item => item.id === productId);
+  const product = window.featuredProducts.find(item => item.id === productId);
   if(!product) return;
 
   if(typeof addToCart !== 'function'){
@@ -198,7 +163,7 @@ function filterProductCards(query){
 
   allCards.forEach(card => {
     const productId = card.dataset.productId;
-    const product = featuredProducts.find(item => item.id === productId);
+    const product = window.featuredProducts.find(item => item.id === productId);
     if(!product){
       card.style.display = '';
       return;
@@ -282,3 +247,47 @@ subscribeForm.addEventListener('submit', async (e) => {
     submitBtn.innerHTML = originalText;
   }
 });
+
+
+// =========================================================
+// CUSTOM-SPEED SMOOTH SCROLL for in-page anchor links
+// =========================================================
+function smoothScrollTo(targetY, duration = 1000){
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  function easeOutQuad(t){
+    return 1 - Math.pow(1 - t, 2);
+  }
+
+  function step(currentTime){
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutQuad(progress);
+
+    window.scrollTo(0, startY + distance * eased);
+
+    if(progress < 1){
+      requestAnimationFrame(step);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const targetId = link.getAttribute('href').slice(1);
+    const targetEl = document.getElementById(targetId);
+    if(!targetEl) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation(); // ← run this handler first, skip other click listeners on this element
+
+    const headerOffset = 72;
+    const targetY = targetEl.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+    smoothScrollTo(targetY, 1000);
+  });
+}, true); // ← capture phase: runs before bubbling-phase listeners like the mobile menu one

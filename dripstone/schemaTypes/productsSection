@@ -1,0 +1,37 @@
+import {NoticeBanner} from './components/NoticeBanner'
+
+export default {
+  name: 'productsSection',
+  title: 'Products Section',
+  type: 'document',
+  fields: [
+    {
+      name: 'notice',
+      title: '',
+      type: 'string',
+      components: { field: NoticeBanner },
+      readOnly: true
+    },
+    {
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      description: 'Small uppercase label above the section title (e.g. "Shop the collection"), centered above "Featured Products" on the homepage.',
+      placeholder: 'Shop the collection'
+    },
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      description: 'Main heading of the Featured Products section (e.g. "Featured Products"), shown in lime green.',
+      placeholder: 'Featured Products'
+    },
+    {
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'text',
+      description: 'Short description line below the title, explaining what this product section is about.',
+      placeholder: 'Handpicked pieces made to last, from everyday carry to considered details.'
+    }
+  ]
+}

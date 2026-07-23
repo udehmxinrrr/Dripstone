@@ -1,6 +1,6 @@
 export default {
   name: 'product',
-  title: 'Product',
+  title: 'Product Cards',
   type: 'document',
   fields: [
     { name: 'productId', title: 'Product ID', type: 'string' },

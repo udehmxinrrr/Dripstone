@@ -19,6 +19,7 @@
 
 html, body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -399,7 +400,15 @@ body {
     radial-gradient(ellipse 900px 500px at 82% 18%, rgba(255,107,53,0.20), transparent 60%),
     radial-gradient(ellipse 700px 500px at 10% 85%, rgba(198,241,53,0.10), transparent 60%),
     var(--bg);
+    scroll-margin-top: 72px
 }
+.hero-product-img {
+  width: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.5));
+  transform: rotate(-3deg);
+}
+
 
 /* ---- marquee-band ---- */
 .marquee-band {
@@ -669,6 +678,7 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+  scroll-margin-top: 40px;
 }
 
 .section-header {
@@ -830,6 +840,7 @@ body {
   border-top: 1px dashed var(--line);
   border-bottom: 1px dashed var(--line);
   padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+  scroll-margin-top: 40px;
 }
 
 .subscribe-inner {
@@ -998,6 +1009,26 @@ body {
   border-color: var(--lime);
   color: var(--bg)
 }
+.social-icon {
+  position: relative;
+}
+.social-icon img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+}
+.social-icon .icon-hover {
+  opacity: 0;
+}
+.social-icon:hover .icon-default {
+  opacity: 0;
+}
+.social-icon:hover .icon-hover {
+  opacity: 1;
+}
+
 
 /* ---- footer-col (Shop / Company) ---- */
 .footer-col h4 {

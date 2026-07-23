@@ -61,17 +61,9 @@ function updateCartCount(){
   }
 }
 
+// ==========================================================
 /* ========== CART PAGE RENDERING (cart.html only) ========== */
 // ==========================================================
-// CURRENCY
-// Change this one value to switch currency everywhere prices
-// are displayed — every card pulls from this single constant.
-// ==========================================================
-const CURRENCY_SYMBOL = 'KES ';
-
-function formatKSh(amount){
-  return `${CURRENCY_SYMBOL}${amount.toLocaleString('en-US')}`; /* Add your country's internationally used initials to format numbers as they do in your country.*/
-}
 
 function renderCart(){
   const cartItemsEl = document.getElementById('cartItems');
@@ -108,7 +100,7 @@ function renderCart(){
       </div>
       <div class="cart-item-side">
         <button class="remove-btn" data-action="remove" aria-label="Remove item">&times;</button>
-        <p class="cart-item-price">${formatKSh(item.price)}</p>
+        <p class="cart-item-price">${formatPrice(item.price)}</p>
       </div>
     </div>
   `).join('');
@@ -120,8 +112,8 @@ function updateSummary(cart){
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const total = subtotal; // shipping is free, no VAT line in this template
 
-  const subtotalText = formatKSh(subtotal);
-  const totalText = formatKSh(total);
+  const subtotalText = formatPrice(subtotal);
+  const totalText = formatPrice(total);
 
   const orderSummaryEl = document.getElementById('orderSummary');
   if(orderSummaryEl){
@@ -196,12 +188,12 @@ document.addEventListener('click', (e) => {
 function goToCheckout(){
   const cart = getCart();
   if(cart.length === 0) return;
-  // Redirect to your checkout flow here
-  alert('Proceeding to checkout — hook this up to your actual checkout page.');
+  window.location.href = 'checkout.html';
 }
 
 /* ========== INIT ========== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  if(typeof loadCurrency === 'function') await loadCurrency();
   updateCartCount();
   renderCart();
 });
