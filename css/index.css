@@ -924,8 +924,12 @@ body {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.btn-subscribe:hover { transform: translateY(-2px); }
-.btn-subscribe:active { transform: translateY(1px); }
+/* on the parent container */
+.subscribe-wrapper { perspective: 500px; }
+
+.btn-subscribe:hover { transform: translateZ(20px) scale(1.03); }
+.btn-subscribe:active { transform: translateZ(5px) scale(0.98); }
+
 
 .subscribe-msg {
   font-family: 'JetBrains Mono', monospace;

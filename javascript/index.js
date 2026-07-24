@@ -250,44 +250,45 @@ subscribeForm.addEventListener('submit', async (e) => {
 
 
 // =========================================================
-// CUSTOM-SPEED SMOOTH SCROLL for in-page anchor links
+// ==== Email Collection Logic =============================
 // =========================================================
-function smoothScrollTo(targetY, duration = 1000){
-  const startY = window.scrollY;
-  const distance = targetY - startY;
-  const startTime = performance.now();
+const form = document.getElementById('subscribeForm');
+const emailInput = document.getElementById('subscribeEmail');
+const messageEl = document.getElementById('subscribeMsg');
+const button = form.querySelector('.btn-subscribe');
+const btnLabel = button.childNodes[0]; // the "Subscribe" text node before the svg
 
-  function easeOutQuad(t){
-    return 1 - Math.pow(1 - t, 2);
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = emailInput.value.trim();
+  if (!email) return;
+
+  button.disabled = true;
+  btnLabel.textContent = 'Subscribing...';
+  messageEl.hidden = true;
+
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Something went wrong');
+
+    messageEl.textContent = "You're in! Check your inbox to confirm.";
+    messageEl.className = 'subscribe-msg success';
+    messageEl.hidden = false;
+    form.reset();
+  } catch (err) {
+    messageEl.textContent = err.message || 'Failed to subscribe. Try again.';
+    messageEl.className = 'subscribe-msg error';
+    messageEl.hidden = false;
+  } finally {
+    button.disabled = false;
+    btnLabel.textContent = 'Subscribe';
   }
-
-  function step(currentTime){
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutQuad(progress);
-
-    window.scrollTo(0, startY + distance * eased);
-
-    if(progress < 1){
-      requestAnimationFrame(step);
-    }
-  }
-
-  requestAnimationFrame(step);
-}
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const targetId = link.getAttribute('href').slice(1);
-    const targetEl = document.getElementById(targetId);
-    if(!targetEl) return;
-
-    e.preventDefault();
-    e.stopImmediatePropagation(); // ← run this handler first, skip other click listeners on this element
-
-    const headerOffset = 72;
-    const targetY = targetEl.getBoundingClientRect().top + window.scrollY - headerOffset;
-
-    smoothScrollTo(targetY, 1000);
-  });
-}, true); // ← capture phase: runs before bubbling-phase listeners like the mobile menu one
+});

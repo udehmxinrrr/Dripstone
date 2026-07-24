@@ -17,7 +17,7 @@ export default {
       title: 'Footer Description',
       type: 'text',
       description: 'Short blurb under the store logo in the footer, describing your brand.',
-      placeholder: 'Considered goods, built to last. Leather, steel, and honest materials, sourced with care.'
+      placeholder: "Streetwear that doesn't ask permission. Born on the block, built for the culture — every piece is made for movement, made to be seen, made to last. Heavyweight fabrics. Oversized fits. Details that hit different up close."
     },
     {
       name: 'address',
@@ -38,7 +38,7 @@ export default {
       title: 'Phone',
       type: 'string',
       description: 'Third line under "Stay in touch" — your contact phone number.',
-      placeholder: '+254 700 000 000'
+      placeholder: '+254 712 345 678'
     },
     {
       name: 'instagramUrl',
