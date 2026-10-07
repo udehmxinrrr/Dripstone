@@ -1,0 +1,62 @@
+# DripStone
+
+A drop-culture streetwear eCommerce site built with vanilla HTML, CSS, and JavaScript, with content managed through Sanity CMS.
+
+## Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript (no framework, no build step)
+- **CMS / Backend:** [Sanity.io](https://sanity.io) — headless content management
+- **Cart:** Client-side, localStorage-based
+
+## Project Structure
+
+```
+DripStone/
+├── css/                  # Stylesheets
+├── html/                 # HTML pages
+├── javascript/           # Site scripts (cart.js, search, etc.)
+└── dripstone/            # Sanity Studio (the CMS editor)
+    ├── schemaTypes/      # Content schema definitions
+    ├── sanity.config.js  # Studio configuration
+    ├── sanity.cli.js     # CLI / deployment configuration
+    └── package.json
+```
+
+## Sanity CMS
+
+The content editor (Sanity Studio) is deployed and accessible from any browser — no local setup required to edit content:
+
+**Studio URL:** https://dripstone-studio.sanity.studio/
+
+- **Project ID:** `la5zc8cr`
+- **Dataset:** `production`
+
+Log in with your Sanity account credentials to add/edit products and other content. Changes made in the Studio are reflected on the live site automatically — the frontend reads content directly from Sanity's API, no redeploy needed for content changes.
+
+### Making schema changes
+
+If you ever need to change the content model (add a field, change a document type, etc.), edit the files in `dripstone/schemaTypes/`, then redeploy the Studio from that folder:
+
+```bash
+cd dripstone
+npx sanity deploy
+```
+
+This only affects the Studio's structure — it does not affect existing content.
+
+## Running the Frontend Locally
+
+The site is static (no build step). Open the HTML files directly in a browser, or serve the project root with any static server — for example, using VS Code's Live Server extension, or:
+
+```bash
+npx serve .
+```
+
+## Deploying the Frontend
+
+This is a static site, so it can be deployed to any static hosting provider — Vercel, Netlify, Cloudflare Pages, GitHub Pages, etc. Connect the repo to your chosen provider and deploy; no environment variables or build command are required since there's no build step.
+
+## Notes
+
+- No payment gateway is currently integrated into the checkout/cart flow.
+- The cart system is entirely client-side (localStorage) — it does not sync across devices or persist server-side.
